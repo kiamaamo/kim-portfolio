@@ -1,9 +1,6 @@
-// Replace the placeholders below with values from your EmailJS account
-// - YOUR_USER_ID (public key) for emailjs.init
-// - YOUR_SERVICE_ID and YOUR_TEMPLATE_ID for sendForm
 (function(){
   if (!window.emailjs) return console.warn('EmailJS not loaded');
-  emailjs.init('S0zvw0KU0YABEAX36'); // public key
+  emailjs.init('S0zvw0KU0YABEAX36');
 
   const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
@@ -16,12 +13,12 @@
     submitBtn.textContent = 'Sending...';
     submitBtn.disabled = true;
 
-     // Ensure email is sent under common template variable names
+    
     try {
       var emailField = form.querySelector('input[name="reply_to"]');
       var emailVal = (emailField && emailField.value) ? emailField.value.trim() : '';
       if (emailVal) {
-        // Some EmailJS templates use {{user_email}} or {{userEmail}} — create a hidden field so both are sent
+        
         var hidden = form.querySelector('input[name="user_email"]');
         if (!hidden) {
           hidden = document.createElement('input');
