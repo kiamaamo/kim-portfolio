@@ -1,0 +1,689 @@
+/* ================================================================
+   Kim Maamo — Skill Highlights Detail Page Styles
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Caveat:wght@500&display=swap');
+
+:root {
+  --purple: #7a4fb8;
+  --purple-dark: #5b3790;
+  --purple-soft: #f3eefb;
+  --dark: #1d1b24;
+  --muted: #6b6475;
+  --line: #ece8f1;
+  --white: #ffffff;
+  --pale: #faf9fd;
+  --shadow-sm: 0 2px 10px rgba(91, 55, 144, 0.06);
+  --shadow-md: 0 12px 30px rgba(91, 55, 144, 0.12);
+  --radius: 14px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--dark);
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background: var(--white);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  color: var(--white);
+  background: var(--purple);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ----------------------------------------------------------------
+   Back Bar
+   ---------------------------------------------------------------- */
+
+.back-bar {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+}
+
+.back-bar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--purple);
+  font-size: 14.5px;
+  font-weight: 600;
+  transition: gap 0.2s ease;
+}
+
+.back-link:hover {
+  gap: 12px;
+}
+
+.back-link svg {
+  width: 17px;
+  height: 17px;
+}
+
+.back-bar .brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: #51416f;
+  line-height: 1.3;
+  text-align: right;
+}
+
+.back-bar .brand-script {
+  font-family: 'Caveat', cursive;
+  font-size: 26px;
+  font-style: italic;
+  line-height: 1;
+}
+
+.back-bar .brand small {
+  color: #4a4452;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+}
+
+/* ----------------------------------------------------------------
+   Page Header
+   ---------------------------------------------------------------- */
+
+.page-header {
+  padding: 56px 0 40px;
+  text-align: center;
+  background:
+    radial-gradient(700px 260px at 50% -20%, rgba(122, 79, 184, 0.12), transparent 70%),
+    var(--pale);
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: var(--purple);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+}
+
+.page-header h1 {
+  margin: 0 0 14px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.page-header p {
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 16.5px;
+}
+
+/* ----------------------------------------------------------------
+   Hero Screenshot
+   ---------------------------------------------------------------- */
+
+.featured-screenshot {
+  padding: 48px 0 8px;
+}
+
+.featured-screenshot .container {
+  max-width: 860px;
+}
+
+.featured-screenshot figure {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.featured-screenshot img {
+  width: 100%;
+  height: auto;
+}
+
+.featured-screenshot figcaption {
+  padding: 14px 22px;
+  color: var(--muted);
+  font-size: 13px;
+  font-style: italic;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+/* ----------------------------------------------------------------
+   Video Highlight
+   ---------------------------------------------------------------- */
+
+.video-highlight {
+  padding: 12px 0 18px;
+}
+
+.video-highlight-card {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 24px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #f9f5ff 0%, #ffffff 100%);
+  box-shadow: var(--shadow-sm);
+}
+
+.video-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.video-copy h2 {
+  margin: 0 0 12px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 4vw, 34px);
+  line-height: 1.2;
+}
+
+.video-copy p {
+  color: var(--muted);
+  font-size: 15.5px;
+}
+
+.video-frame {
+  width: 100%;
+  max-width: 1280px;
+  aspect-ratio: 1280 / 720;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #1d1b24;
+  box-shadow: var(--shadow-md);
+}
+
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+/* ----------------------------------------------------------------
+   What I Do
+   ---------------------------------------------------------------- */
+
+.duties {
+  padding: 56px 0 16px;
+}
+
+.duties h2,
+.skills-block h2 {
+  margin-bottom: 24px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.duties-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.duty-item {
+  display: flex;
+  gap: 12px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+}
+
+.duty-item svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  color: var(--purple);
+  stroke-width: 2;
+}
+
+.duty-item b {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 15.5px;
+}
+
+.duty-item span {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------------------
+   Skills
+   ---------------------------------------------------------------- */
+
+.skills-block {
+  padding: 32px 0 60px;
+}
+
+.skills-block h2 {
+  text-align: center;
+}
+
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 42px;
+}
+
+.skill-pills span {
+  padding: 9px 18px;
+  border: 1px solid #e2d9f0;
+  border-radius: 999px;
+  background: var(--white);
+  color: #4a4452;
+  font-size: 14px;
+}
+
+/* ----------------------------------------------------------------
+   Screenshot Gallery
+   ---------------------------------------------------------------- */
+
+.gallery {
+  padding: 48px 0 30px;
+  border-top: 1px solid var(--line);
+  background: var(--pale);
+}
+
+.gallery h2 {
+  margin-bottom: 24px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.gallery-grid figure {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gallery-grid figure:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
+/* Ensure slider images also show the zoom cursor */
+.slider img {
+  cursor: zoom-in;
+}
+
+.gallery-grid figcaption {
+  padding: 12px 16px;
+  color: var(--muted);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+/* Apply the same polished figure styles to slider slides */
+.slider .slide figure {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.slider .slide figure:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.slider .slide img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Figcaption: ensure it fits under the image, centers text and avoids overflow */
+.slider .slide figcaption,
+.gallery-grid figcaption {
+  padding: 10px 14px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-break: break-word;
+}
+
+/* Slider styles (keeps the look of the gallery but enables horizontal sliding) */
+.slider {
+  position: relative;
+}
+
+.slider-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+}
+
+/* Hide native scrollbar while preserving scroll (cross-browser) */
+.slider-track {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.slider-track::-webkit-scrollbar {
+  height: 0; /* WebKit */
+  background: transparent;
+}
+
+.slide {
+  flex: 0 0 calc(50% - 10px);
+  scroll-snap-align: start;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.94);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  cursor: pointer;
+  z-index: 3;
+}
+
+.slider-btn.prev { left: -34px; }
+.slider-btn.next { right: -34px; }
+
+.slider-btn svg { width: 18px; height: 18px; color: var(--purple); }
+
+@media (max-width: 720px) {
+  .slide { flex: 0 0 100%; }
+  .slider-btn.prev { left: 8px; }
+  .slider-btn.next { right: 8px; }
+  .slider-btn { width: 40px; height: 40px; }
+}
+
+/* Pagination dots */
+.slider-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.slider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.slider-dot.active {
+  background: var(--purple);
+  transform: scale(1.15);
+}
+
+/* ----------------------------------------------------------------
+   Image Zoom Lightbox
+   ---------------------------------------------------------------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(20, 16, 28, 0.92);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  cursor: zoom-out;
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox.show {
+  opacity: 1;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: rotate(90deg);
+}
+
+.lightbox-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.lightbox-figure {
+  max-width: min(92vw, 1100px);
+  max-height: 90vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.lightbox-figure img {
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  cursor: default;
+}
+
+.lightbox-figure figcaption {
+  color: #e4def3;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ----------------------------------------------------------------
+   CTA
+   ---------------------------------------------------------------- */
+
+.cta {
+  padding: 64px 0;
+  background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+  color: #fff;
+  text-align: center;
+}
+
+.cta h2 {
+  margin: 0 0 12px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.cta p {
+  margin: 0 auto 26px;
+  max-width: 480px;
+  font-size: 15.5px;
+  opacity: 0.92;
+}
+
+.cta .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 28px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--purple-dark);
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+}
+
+.cta .button svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ----------------------------------------------------------------
+   Footer
+   ---------------------------------------------------------------- */
+
+footer {
+  padding: 28px;
+  background: var(--dark);
+  color: #cfc8d8;
+  font-size: 13.5px;
+  text-align: center;
+}
+
+footer a {
+  color: #d9cdef;
+  font-weight: 600;
+}
+
+footer a:hover {
+  color: #fff;
+}
+
+/* ----------------------------------------------------------------
+   Responsive
+   ---------------------------------------------------------------- */
+
+@media (max-width: 720px) {
+  .video-highlight-card,
+  .duties-grid,
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .back-bar .brand {
+    display: none;
+  }
+
+  .page-header {
+    padding: 44px 0 32px;
+  }
+
+  .featured-screenshot {
+    padding-top: 32px;
+  }
+
+  .gallery-grid img {
+    height: 190px;
+  }
+
+  .video-highlight-card {
+    padding: 18px;
+  }
+}

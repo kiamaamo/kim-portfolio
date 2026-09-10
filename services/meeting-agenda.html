@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting Agenda + Minutes + Follow-up | Kim Maamo</title>
+  <link rel="stylesheet" href="skills.css">
+</head>
+<body>
+  <div class="back-bar">
+    <div class="container">
+      <a class="back-link" href="../index.html#work">
+        <i data-lucide="arrow-left"></i>
+        Back to Services
+      </a>
+      <span class="brand">
+        <span class="brand-script">Kim Maamo</span>
+        <small>EXECUTIVE VIRTUAL ASSISTANT</small>
+      </span>
+    </div>
+  </div>
+
+  <header class="page-header">
+    <div class="container">
+      <span class="eyebrow">Executive Support</span>
+      <h1>Meeting Agenda + Minutes + Follow-up</h1>
+      <p>Organized, polished meeting support that keeps conversations productive, decisions documented, and action items moving forward.</p>
+    </div>
+  </header>
+
+  <section class="gallery">
+    <div class="container">
+      <h2>Meeting Documentation Samples</h2>
+      <div class="slider" aria-label="Screenshots slider">
+        <button class="slider-btn prev" aria-label="Previous slide"><i data-lucide="chevron-left"></i></button>
+        <div class="slider-track" id="sliderTrack">
+          <div class="slide">
+            <figure>
+              <img src="../assets/meeting/meeting1.png" alt="Meeting agenda and minutes sample">
+              <figcaption>Structured meeting agenda and summary</figcaption>
+            </figure>
+          </div>
+          <div class="slide">
+            <figure>
+              <img src="../assets/meeting/meeting2.png" alt="Meeting agenda and minutes sample">
+              <figcaption>Structured meeting agenda and summary</figcaption>
+            </figure>
+          </div>
+        </div>
+        <button class="slider-btn next" aria-label="Next slide"><i data-lucide="chevron-right"></i></button>
+        <div class="slider-dots" id="sliderDots" aria-hidden="false"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="duties">
+    <div class="container">
+      <h2>What I Do</h2>
+      <div class="duties-grid">
+        <div class="duty-item">
+          <i data-lucide="calendar"></i>
+          <div>
+            <b>Meeting Agenda Preparation</b>
+            <span>Creating clear agendas with objectives, priorities, and talking points for productive meetings.</span>
+          </div>
+        </div>
+        <div class="duty-item">
+          <i data-lucide="clipboard-list"></i>
+          <div>
+            <b>Minutes of the Meeting</b>
+            <span>Capturing key discussion points, decisions, and next steps in a concise and professional format.</span>
+          </div>
+        </div>
+        <div class="duty-item">
+          <i data-lucide="check-check"></i>
+          <div>
+            <b>Follow-up Tracking</b>
+            <span>Monitoring action items and ensuring accountability after each meeting.</span>
+          </div>
+        </div>
+        <div class="duty-item">
+          <i data-lucide="file-text"></i>
+          <div>
+            <b>Decision & Action Logs</b>
+            <span>Documenting responsibilities, deadlines, and updates for smooth execution.</span>
+          </div>
+        </div>
+        <div class="duty-item">
+          <i data-lucide="mail-check"></i>
+          <div>
+            <b>Meeting Summaries</b>
+            <span>Preparing polished recaps for teams, clients, or stakeholders to keep everyone aligned.</span>
+          </div>
+        </div>
+        <div class="duty-item">
+          <i data-lucide="shield-check"></i>
+          <div>
+            <b>Documentation Accuracy</b>
+            <span>Ensuring every agenda, note, and follow-up is clear, organized, and easy to reference.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="skills-block">
+    <div class="container">
+      <h2>Skills & Tools</h2>
+      <div class="skill-pills">
+        <span>Meeting Agendas</span>
+        <span>Minutes Writing</span>
+        <span>Action Tracking</span>
+        <span>Follow-up Management</span>
+        <span>Google Docs</span>
+        <span>Microsoft Word</span>
+        <span>Notion</span>
+        <span>Documentation</span>
+        <span>Executive Communication</span>
+        <span>Task Coordination</span>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="cta">
+    <div class="container">
+      <h2>Need Meetings That Stay Organized and On Track?</h2>
+      <p>I can prepare polished agendas, capture clear meeting minutes, and keep follow-ups structured so nothing slips through the cracks.</p>
+      <a class="button" href="../index.html#contact">Hire Me <i data-lucide="send"></i></a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Kim Maamo · <a href="../index.html">Back to Home</a></p>
+  </footer>
+
+  <!-- Image zoom lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Zoomed image preview" hidden>
+    <button class="lightbox-close" aria-label="Close preview (Esc)"><i data-lucide="x"></i></button>
+    <figure class="lightbox-figure">
+      <img src="" alt="">
+      <figcaption></figcaption>
+    </figure>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script>
+    (function () {
+      var lightbox = document.getElementById('lightbox');
+      if (!lightbox) return;
+      var lightboxImg = lightbox.querySelector('img');
+      var lightboxCaption = lightbox.querySelector('figcaption');
+      var closeBtn = lightbox.querySelector('.lightbox-close');
+      var galleryImgs = document.querySelectorAll('.gallery img');
+      var lastOpened = null;
+
+      function openLightbox(img) {
+        lastOpened = img;
+        lightboxImg.src = img.currentSrc || img.src;
+        lightboxImg.alt = img.alt;
+        var fig = img.closest('figure');
+        var cap = fig ? fig.querySelector('figcaption') : null;
+        lightboxCaption.textContent = cap ? cap.textContent : '';
+        lightbox.hidden = false;
+        requestAnimationFrame(function () {
+          lightbox.classList.add('show');
+        });
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        if (lightbox.hidden) return;
+        lightbox.classList.remove('show');
+        document.body.style.overflow = '';
+        setTimeout(function () {
+          lightbox.hidden = true;
+        }, 250);
+        if (lastOpened) lastOpened.focus({ preventScroll: true });
+      }
+
+      galleryImgs.forEach(function (img) {
+        img.addEventListener('click', function () {
+          openLightbox(img);
+        });
+      });
+
+      closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeLightbox();
+      });
+
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === closeBtn) return;
+        closeLightbox();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLightbox();
+      });
+
+      /* Slider controls: simple prev/next that scrolls the track to each slide */
+      var track = document.getElementById('sliderTrack');
+      var slides = track ? Array.from(track.children) : [];
+      var prevBtn = document.querySelector('.slider-btn.prev');
+      var nextBtn = document.querySelector('.slider-btn.next');
+      var currentIndex = 0;
+      var dotsContainer = document.getElementById('sliderDots');
+
+      function clampIndex(i) {
+        return Math.max(0, Math.min(i, Math.max(0, slides.length - 1)));
+      }
+
+      function scrollToIndex(i) {
+        if (!track || !slides.length) return;
+        currentIndex = clampIndex(i);
+        var slide = slides[currentIndex];
+        track.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
+        updateDots();
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { scrollToIndex(currentIndex - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { scrollToIndex(currentIndex + 1); });
+
+      // allow arrow keys to control slider when focus is inside the gallery
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') scrollToIndex(currentIndex - 1);
+        if (e.key === 'ArrowRight') scrollToIndex(currentIndex + 1);
+      });
+
+      // Dots: create, update, and wire interactions
+      function initDots() {
+        if (!dotsContainer || !slides.length) return;
+        dotsContainer.innerHTML = '';
+        slides.forEach(function (_, i) {
+          var btn = document.createElement('button');
+          btn.className = 'slider-dot';
+          btn.setAttribute('aria-label', 'Slide ' + (i + 1));
+          btn.setAttribute('data-index', i);
+          btn.addEventListener('click', function () { scrollToIndex(i); });
+          dotsContainer.appendChild(btn);
+        });
+        updateDots();
+      }
+
+      function updateDots() {
+        if (!dotsContainer) return;
+        Array.from(dotsContainer.children).forEach(function (btn) {
+          var idx = parseInt(btn.getAttribute('data-index'), 10);
+          if (idx === currentIndex) btn.classList.add('active'); else btn.classList.remove('active');
+        });
+      }
+
+      // Update index while user scrolls (keeps dots in sync)
+      var isTicking = false;
+      if (track) {
+        track.addEventListener('scroll', function () {
+          if (isTicking) return;
+          isTicking = true;
+          requestAnimationFrame(function () {
+            var left = track.scrollLeft;
+            var nearest = 0;
+            var best = Infinity;
+            slides.forEach(function (s, idx) {
+              var d = Math.abs(s.offsetLeft - left);
+              if (d < best) { best = d; nearest = idx; }
+            });
+            if (nearest !== currentIndex) {
+              currentIndex = nearest;
+              updateDots();
+            }
+            isTicking = false;
+          });
+        }, { passive: true });
+      }
+
+      initDots();
+    })();
+  </script>
+</body>
+</html>
