@@ -1,4 +1,4 @@
-﻿/* ================================================================
+/* ================================================================
    Kim Maamo | Virtual Assistant
    ================================================================ */
 
@@ -97,6 +97,43 @@ section {
 
 .section-head .eyebrow {
   margin-bottom: 10px;
+}
+
+/* ----------------------------------------------------------------
+   Page banner
+   ---------------------------------------------------------------- */
+.page-banner {
+  background: linear-gradient(135deg, rgba(122,79,184,0.12), rgba(91,55,144,0.06));
+  padding: 48px 28px;
+  margin-bottom: 8px;
+}
+
+.page-banner .banner-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--dark);
+  text-align: center;
+  margin: 6px 0 6px;
+}
+
+.page-banner .banner-sub {
+  text-align: center;
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 15px;
+}
+
+@media (max-width: 640px) {
+  .page-banner .banner-title {
+    font-size: 28px;
+  }
+}
+
+/* Reduce vertical gap between banner and the following section (contact form) */
+.page-banner + .section.contact-section {
+  padding-top: 28px;
+  margin-top: 0;
 }
 
 .section-head h2,
@@ -797,6 +834,102 @@ footer {
   background: var(--dark);
   color: #cfc8d8;
   font-size: 14px;
+}
+
+/* ----------------------------------------------------------------
+   Contact Form Styles
+   ---------------------------------------------------------------- */
+.contact-section .section-head {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.contact-grid {
+  max-width: 920px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 32px;
+  align-items: start;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-form label {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #efe9f5;
+  background: #fff;
+  font-size: 15px;
+  color: var(--dark);
+  resize: vertical;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--purple);
+  box-shadow: 0 10px 30px rgba(122,79,184,0.06);
+}
+
+.contact-form button[type="submit"] {
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+#form-status {
+  margin-top: 8px;
+  color: var(--purple-dark);
+  font-weight: 600;
+}
+
+.contact-info {
+  padding: 22px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, var(--pale), #fff);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-info h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.contact-info p,
+.contact-info h4 {
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+@media (max-width: 880px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info {
+    order: 2;
+  }
 }
 
 footer span {
