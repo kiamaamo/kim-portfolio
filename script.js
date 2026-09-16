@@ -193,7 +193,6 @@
   let currentPage = 0;
   let timer = null;
   let hovering = false;
-  let touchStartX = null;
 
   const buildDots = () => {
     if (!dotsWrap) return;
@@ -211,26 +210,9 @@
     }
   };
 
-  const goTo = (page, animate = true) => {
-    currentPage = Math.max(0, Math.min(page, totalPages - 1));
-    updateSlider(animate);
-  };
+  const slideX = (el) => (el ? el.offsetLeft - track.offsetLeft : 0);
 
-  const updateSlider = (animate = true) => {
-    const gap = parseFloat(getComputedStyle(track).gap || 0);
-    const slideWidth = slides[0].offsetWidth;
-    const pageWidth = slideWidth * pageSize + gap * (pageSize - 1);
-
-    track.style.transition = animate ? '' : 'none';
-    track.style.transform = 'translateX(-' + (currentPage * pageWidth) + 'px)';
-
-    slides.forEach((slide, index) => {
-      slide.classList.toggle(
-        'active',
-        index >= currentPage * pageSize && index < (currentPage + 1) * pageSize
-      );
-    });
-
+  const updateControls = () => {
     if (dotsWrap) {
       Array.from(dotsWrap.children).forEach((dot, index) => {
         dot.classList.toggle('active', index === currentPage);
@@ -239,6 +221,41 @@
 
     if (prevBtn) prevBtn.disabled = currentPage === 0;
     if (nextBtn) nextBtn.disabled = currentPage >= totalPages - 1;
+  };
+
+  const goTo = (page, animate = true) => {
+    currentPage = Math.max(0, Math.min(page, totalPages - 1));
+
+    const target = slides[currentPage * pageSize];
+    if (!target) return;
+
+    // The track is a native scroll container, so the browser handles
+    // positioning — scrollTo can never land on an empty page.
+    track.scrollTo({
+      left: slideX(target),
+      behavior: animate && !reducedMotion ? 'smooth' : 'auto'
+    });
+    updateControls();
+  };
+
+  // Keep dots/arrows in sync after the user swipes or scrolls the track.
+  const syncFromScroll = () => {
+    const x = track.scrollLeft;
+    let page = 0;
+    for (let i = 0; i < totalPages; i += 1) {
+      const t = slides[i * pageSize];
+      if (t && slideX(t) <= x + 8) page = i;
+    }
+    currentPage = page;
+    updateControls();
+  };
+
+  const refresh = () => {
+    pageSize = pagesForWidth();
+    totalPages = Math.max(1, Math.ceil(slides.length / pageSize));
+    buildDots();
+    currentPage = Math.min(currentPage, totalPages - 1);
+    goTo(currentPage, false);
   };
 
   const scheduleNext = () => {
@@ -279,41 +296,33 @@
     scheduleNext();
   });
 
-  slider.addEventListener(
-    'touchstart',
-    (event) => {
-      if (event.touches.length) touchStartX = event.touches[0].clientX;
-      hovering = true;
-      clearTimeout(timer);
-    },
-    { passive: true }
-  );
+  // Native swipe: the track is a scroll container with scroll-snap, so
+  // drag/swipe/mouse-wheel all work on their own. Just pause autoplay
+  // while the user is interacting with the slider.
+  track.addEventListener('scroll', () => requestAnimationFrame(syncFromScroll), { passive: true });
 
-  slider.addEventListener(
-    'touchend',
-    (event) => {
-      if (touchStartX === null) return;
-      const delta = event.changedTouches[0].clientX - touchStartX;
-      touchStartX = null;
-      hovering = false;
+  slider.addEventListener('touchstart', () => {
+    hovering = true;
+    clearTimeout(timer);
+  }, { passive: true });
 
-      if (delta < -40) goTo(currentPage + 1);
-      else if (delta > 40) goTo(currentPage - 1);
-      restartAutoplay();
-    },
-    { passive: true }
-  );
+  slider.addEventListener('touchend', () => {
+    hovering = false;
+    scheduleNext();
+  }, { passive: true });
 
   window.addEventListener('resize', () => {
-    pageSize = pagesForWidth();
-    totalPages = Math.max(1, Math.ceil(slides.length / pageSize));
-    buildDots();
-    currentPage = Math.min(currentPage, totalPages - 1);
-    updateSlider(false);
+    refresh();
     restartAutoplay();
   });
 
-  buildDots();
-  updateSlider(false);
+  // Re-position once the page and fonts have finished loading, in case
+  // card heights/layout shifted after the initial paint.
+  window.addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(refresh);
+  }
+
+  refresh();
   scheduleNext();
 })();
