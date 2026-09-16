@@ -744,14 +744,20 @@ section {
 .testimonial-track {
   display: flex;
   gap: 24px;
-  overflow: hidden;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   padding-bottom: 16px;
-  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+}
+
+.testimonial-track::-webkit-scrollbar {
+  display: none;
 }
 
 .testimonial-track > .testimonial-slide {
   flex: 0 0 calc((100% - 48px) / 3);
+  scroll-snap-align: start;
 }
 
 .testimonial-slider article {
@@ -766,9 +772,18 @@ section {
   display: flex;
   align-items: center;
   gap: 20px;
-  border: none !important;
-  background: linear-gradient(135deg, var(--purple), var(--purple-dark)) !important;
+  padding: 30px;
+  border: none;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--purple), var(--purple-dark));
   color: #fff;
+  box-shadow: var(--shadow-md);
+}
+
+.testimonial-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 44px;
 }
 
 .telegram {
@@ -1087,6 +1102,10 @@ footer svg {
   .services .service-grid,
   .work-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonial-track > .testimonial-slide {
+    flex: 0 0 calc((100% - 24px) / 2);
   }
 
   .testimonial-track > .testimonial-slide {
