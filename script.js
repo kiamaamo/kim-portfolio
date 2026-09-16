@@ -158,3 +158,162 @@
   window.addEventListener('resize', updateSlider);
   updateSlider();
 })();
+
+/* ================================================================
+   TESTIMONIALS SLIDER
+   
+   ================================================================ */
+
+(function () {
+  const slider = document.querySelector('.testimonial-slider');
+  if (!slider) return;
+
+  const track = slider.querySelector('.testimonial-track');
+  const slides = Array.from(slider.querySelectorAll('.testimonial-slide'));
+  const prevBtn = slider.querySelector('.testimonial-prev');
+  const nextBtn = slider.querySelector('.testimonial-next');
+  const dotsWrap = slider.querySelector('.testimonial-dots');
+
+  if (!track || slides.length === 0) return;
+
+  const AUTO_MS = 6500;
+
+  const pagesForWidth = () => {
+    if (window.innerWidth <= 720) return 1;
+    if (window.innerWidth <= 960) return 2;
+    return 3;
+  };
+
+  const reducedMotion =
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let pageSize = pagesForWidth();
+  let totalPages = Math.max(1, Math.ceil(slides.length / pageSize));
+  let currentPage = 0;
+  let timer = null;
+  let hovering = false;
+  let touchStartX = null;
+
+  const buildDots = () => {
+    if (!dotsWrap) return;
+    dotsWrap.innerHTML = '';
+
+    for (let i = 0; i < totalPages; i += 1) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Go to testimonial page ' + (i + 1));
+      dot.addEventListener('click', () => {
+        goTo(i);
+        restartAutoplay();
+      });
+      dotsWrap.appendChild(dot);
+    }
+  };
+
+  const goTo = (page, animate = true) => {
+    currentPage = Math.max(0, Math.min(page, totalPages - 1));
+    updateSlider(animate);
+  };
+
+  const updateSlider = (animate = true) => {
+    const gap = parseFloat(getComputedStyle(track).gap || 0);
+    const slideWidth = slides[0].offsetWidth;
+    const pageWidth = slideWidth * pageSize + gap * (pageSize - 1);
+
+    track.style.transition = animate ? '' : 'none';
+    track.style.transform = 'translateX(-' + (currentPage * pageWidth) + 'px)';
+
+    slides.forEach((slide, index) => {
+      slide.classList.toggle(
+        'active',
+        index >= currentPage * pageSize && index < (currentPage + 1) * pageSize
+      );
+    });
+
+    if (dotsWrap) {
+      Array.from(dotsWrap.children).forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentPage);
+      });
+    }
+
+    if (prevBtn) prevBtn.disabled = currentPage === 0;
+    if (nextBtn) nextBtn.disabled = currentPage >= totalPages - 1;
+  };
+
+  const scheduleNext = () => {
+    clearTimeout(timer);
+    if (reducedMotion || hovering || slides.length <= pageSize) return;
+    timer = setTimeout(() => {
+      goTo(currentPage === totalPages - 1 ? 0 : currentPage + 1);
+      scheduleNext();
+    }, AUTO_MS);
+  };
+
+  const restartAutoplay = () => {
+    clearTimeout(timer);
+    scheduleNext();
+  };
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      goTo(currentPage - 1);
+      restartAutoplay();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      goTo(currentPage + 1);
+      restartAutoplay();
+    });
+  }
+
+  slider.addEventListener('mouseenter', () => {
+    hovering = true;
+    clearTimeout(timer);
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    hovering = false;
+    scheduleNext();
+  });
+
+  slider.addEventListener(
+    'touchstart',
+    (event) => {
+      if (event.touches.length) touchStartX = event.touches[0].clientX;
+      hovering = true;
+      clearTimeout(timer);
+    },
+    { passive: true }
+  );
+
+  slider.addEventListener(
+    'touchend',
+    (event) => {
+      if (touchStartX === null) return;
+      const delta = event.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      hovering = false;
+
+      if (delta < -40) goTo(currentPage + 1);
+      else if (delta > 40) goTo(currentPage - 1);
+      restartAutoplay();
+    },
+    { passive: true }
+  );
+
+  window.addEventListener('resize', () => {
+    pageSize = pagesForWidth();
+    totalPages = Math.max(1, Math.ceil(slides.length / pageSize));
+    buildDots();
+    currentPage = Math.min(currentPage, totalPages - 1);
+    updateSlider(false);
+    restartAutoplay();
+  });
+
+  buildDots();
+  updateSlider(false);
+  scheduleNext();
+})();
